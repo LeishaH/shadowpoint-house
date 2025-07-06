@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shadowpoint House - My Dream House</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/309/original/SH_Favicon.png?1751243103"
+    />
+    <style>
+      /* =========================
+         1. Base Styles
+      =========================== */
+      body {
+        font-family: "Georgia", serif;
+        margin: 0;
+        padding: 1rem 2rem;
+        background: #fefcf9;
+        color: #3a2e2e;
+        line-height: 1.6;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-top: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2 {
+        color: #4b2e2e;
+        text-align: center;
+        transition: color 0.5s ease;
+      }
+
+      h1 {
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+        display: inline-block;
+        background-color: rgba(248, 185, 180, 0.7);
+        padding: 0.5rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(216, 91, 76, 0.7);
+      }
+
+      h1:hover {
+        color: #d85b4c;
+        transform: scale(1.05);
+        text-shadow: 2px 2px 4px rgba(216, 91, 76, 0.7);
+      }
+
+      section {
+        margin: 2rem 0;
+        padding: 1.5rem 2rem;
+        background: #f5f0eb;
+        border-radius: 12px;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        border-left: 6px solid #8b0000;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      #cliffside-house video {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* =========================
+         2. Utility & Animation
+      =========================== */
+      @keyframes glowPulse {
+        0% {
+          box-shadow: 0 0 5px rgba(216, 91, 76, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 15px rgba(216, 91, 76, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 5px rgba(216, 91, 76, 0.4);
+        }
+      }
+
+      /* =========================
+         3. Buttons
+      =========================== */
+      button {
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background-color: #4b2e2e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #6a3e3e;
+      }
+
+      #pullSecretBook {
+        background-color: #8b0000;
+        font-family: "Georgia", serif;
+        border: 2px solid #d85b4c;
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+      }
+
+      #pullSecretBook:hover {
+        background-color: #a30000;
+        transform: scale(1.05);
+      }
+
+      .book-button {
+        animation: glowPulse 2s infinite;
+      }
+
+      #exploreBtn {
+        background-color: #d85b4c;
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #exploreBtn:hover {
+        background-color: #b94a3c;
+      }
+
+      /* =========================
+         4. Modals and Overlays
+      =========================== */
+      #houseModal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(30, 30, 30, 0.9);
+        transition: background-color 0.5s ease;
+      }
+
+      #houseModal img {
+        max-width: 90%;
+        max-height: 80vh;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        margin-bottom: 1.5rem;
+      }
+
+      #pirate-journal {
+        display: none;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fdf7e3;
+        border: 3px solid #b5895e;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        padding: 2rem;
+        max-width: 600px;
+        z-index: 9999;
+        font-family: "Georgia", serif;
+        color: #3a2e2e;
+      }
+
+      /* =========================
+         5. Galleries: Crypt, House, Garden
+      =========================== */
+      #crypt-gallery {
+        margin-top: 2rem;
+        text-align: center;
+        display: none;
+      }
+
+      .crypt-gallery,
+      .reel-gallery {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .crypt-item,
+      .reel-item {
+        width: 240px;
+        border-radius: 10px;
+        opacity: 0.8;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        cursor: pointer;
+      }
+
+      .crypt-item:hover,
+      .reel-item:hover {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      .crypt-item.clicked,
+      .reel-item.clicked {
+        transform: scale(2.5) translateY(-100px);
+        z-index: 1000;
+        opacity: 1;
+        position: relative;
+      }
+
+      #cryptFinalMessage,
+      .reel-final-message {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: #fefcf9;
+        font-family: "Georgia", serif;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 10px;
+        margin-top: 1rem;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      .reel-final-message button {
+        margin-top: 1rem;
+        background-color: #d85b4c;
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .reel-final-message button:hover {
+        background-color: #b94a3c;
+      }
+
+      /* =========================
+         6. Special Section Styling
+      =========================== */
+      #puppy-corner {
+        background-color: #fff9f0;
+        border-left-color: #f7b733;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        color: #6b4c23;
+        text-align: center;
+        box-shadow: 2px 2px 10px rgba(247, 183, 51, 0.4);
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      #piano {
+        border-left-color: #a97450;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        color: #4a3c31;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      /* =========================
+         7. Footer Styles
+      =========================== */
+      footer {
+        text-align: center;
+      }
+
+      footer a:link,
+      footer a:visited {
+        color: #4b2e2e;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+      }
+
+      footer a:hover {
+        color: #d85b4c;
+        transform: scale(1.05);
+        text-shadow: 2px 2px 4px rgba(216, 91, 76, 0.7);
+      }
+
+      footer p {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      /* =========================
+         8. Dark Mode Overrides
+      =========================== */
+      body.dark-mode {
+        background-color: #0f0f0f;
+        color: #e6e1da;
+      }
+
+      body.dark-mode h1,
+      body.dark-mode h2 {
+        color: #ffe3dc;
+      }
+
+      body.dark-mode section {
+        background-color: #181414;
+        color: #e6e1da;
+        border-left-color: #ff6a5e;
+        box-shadow: 2px 2px 12px rgba(255, 106, 94, 0.3);
+      }
+
+      body.dark-mode #houseModal {
+        background-color: rgba(10, 10, 10, 0.95);
+      }
+
+      body.dark-mode button {
+        background-color: #ff6a5e;
+        color: #0f0f0f;
+        box-shadow: 0 0 6px rgba(255, 106, 94, 0.5);
+      }
+
+      body.dark-mode button:hover {
+        background-color: #ff8177;
+      }
+
+      body.dark-mode #pullSecretBook {
+        background-color: #8b0000;
+        border: 2px solid #ff6a5e;
+        box-shadow: 0 0 12px rgba(255, 106, 94, 0.7);
+      }
+
+      body.dark-mode #pullSecretBook:hover {
+        background-color: #a30000;
+        transform: scale(1.05);
+      }
+
+      body.dark-mode footer a {
+        color: #f4d6d6;
+      }
+
+      body.dark-mode footer a:hover {
+        color: #f4d6d6;
+        text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.9);
+      }
+
+      body.dark-mode #darkModeToggle {
+        background-color: #ff6a5e;
+        color: #0f0f0f;
+        box-shadow: 0 0 10px rgba(255, 106, 94, 0.6);
+      }
+
+      body.dark-mode #darkModeToggle:hover {
+        background-color: #ff8177;
+      }
+
+      body.dark-mode #puppy-corner {
+        background-color: #332b17;
+        color: #f7b733;
+        box-shadow: 2px 2px 15px rgba(247, 183, 51, 0.8);
+      }
+
+      body.dark-mode #piano {
+        background-color: #2e261f;
+        color: #d9c9b0;
+        box-shadow: 3px 3px 15px rgba(169, 116, 80, 0.8);
+      }
+
+      body.dark-mode #pirate-journal {
+        background-color: #2b2b2b;
+        color: #fdf7e3;
+        border-color: #a97450;
+      }
+
+      /* =========================
+         9. Fixed Elements
+      =========================== */
+      #darkModeToggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background-color: #d85b4c;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 1100;
+        box-shadow: 0 0 8px rgba(216, 91, 76, 0.8);
+        transition: background-color 0.3s ease;
+      }
+
+      #darkModeToggle:hover {
+        background-color: #b94a3c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dark mode toggle -->
+    <button id="darkModeToggle" aria-label="Toggle dark mode">
+      🌙 Dark Mode
+    </button>
+
+    <!-- Intro modal with Explore button -->
+    <div
+      id="houseModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDesc"
+    >
+      <img
+        src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/180/original/Shadowpoint_House_%282%29.png?1751107484"
+        alt="Shadowpoint House"
+      />
+      <button id="exploreBtn">Let’s Explore</button>
+    </div>
+
+    <header
+      style="
+        text-align: center;
+        position: relative;
+        padding: 3rem 1.5rem;
+        color: #f9e6e3; /* pale coral/cream for contrast */
+        background: linear-gradient(
+            rgba(44, 44, 44, 0.35),
+            rgba(44, 44, 44, 0.35)
+          ),
+          url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/311/original/whales_and_dolphins.png?1751244937')
+            no-repeat center center / cover;
+      "
+    >
+      <h1 id="modalTitle">
+        Shadowpoint House: <br />
+        My Dream House on the Edge
+      </h1>
+      <p id="modalDesc" style="margin-top: 0.5rem; font-style: italic">
+        Set atop a rugged cliff near the lighthouse at Fingal Head,<br />
+        where ocean whispers meet history and the legacy of Captain Elias
+        Mooring lingers in the sea breeze.
+      </p>
+    </header>
+
+    <section id="cliffside-house">
+      <h2>
+        Shadowpoint House — A Lighthouse View <br />
+        <div style="padding: 56.25% 0 0 0; position: relative">
+          <iframe
+            src="https://player.vimeo.com/video/1098373647?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            title="lighthouse_view"
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+      </h2>
+      <p>
+        Perched on the rugged cliffs just beyond the winding headland trail,
+        Shadowpoint House gazes out across the Pacific. By day, dolphins play in
+        the surf below and migrating whales breach beyond the reef. The
+        lighthouse stands proudly across the cove, its white tower a sentinel of
+        time.
+      </p>
+      <p>
+        As night falls, the beam of the lighthouse sweeps the coastline. Its
+        rhythmic glow dances across the house, casting long shadows and soft
+        flickers that stir the imagination. Whispers of shipwrecks, of sailors'
+        songs, of ancient stories held by these rocks, echo in the rustling
+        casuarina trees. The air carries history, and the house listens.
+      </p>
+      <p
+        style="
+          margin-top: 2rem;
+          font-weight: bold;
+          color: #b22222;
+          text-align: center;
+        "
+      >
+        Folk tales speak of Shadowpoint House standing as a point — a lighthouse
+        of sorts — not a guide for passing ships, but a silent signal to those
+        who drift between realms: the forgotten, the watchers, the ones the sea
+        never gave back.
+      </p>
+      <button
+        onclick="alert('Step onto the cliffside veranda and breathe in the ocean breeze. View the House Gallery below.')"
+      >
+        Enter Shadowpoint House
+      </button>
+    </section>
+
+    <section id="house-reel">
+      <h2>House Gallery</h2>
+      <div class="reel-gallery" id="houseGallery">
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/510/original/cliffside_verandah.jpg?1751501991"
+          alt="Cliffside Veranda"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          Step out onto the cliffside veranda to breathe in fresh ocean air
+          while gazing over dramatic coastal cliffs.
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/506/original/Living_room.jpg?1751501809"
+          alt="Coastal Living Room"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          Sun-drenched living room with panoramic ocean views and exposed timber
+          beams, blending rustic charm and coastal elegance.
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/508/original/kitchen.jpg?1751501917"
+          alt="Kitchen"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          A chef’s delight — the rustic kitchen features a spacious butcher’s
+          block island and open shelves with vintage accents.
+        </figcaption>
+
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/512/original/master_bedroom.jpg?1751502117"
+          alt="Master bedroom"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          Elegant master bedroom with antique furnishings, a canopy bed draped
+          in sheer fabric, warm golden lighting, ocean glimpses through a nearby
+          window — romantic and timeless
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/514/original/bathroom.jpg?1751502373"
+          alt="Bathroom"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          A nautical-themed bathroom where driftwood tones and burnished brass
+          create a cozy, sea-worn sanctuary.
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/513/original/guest_bedroom.jpg?1751502355"
+          alt="Guest bedroom"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          Rustic guest bedroom with exposed wooden beams, cozy quilt, large
+          window framing treetops and ocean horizon, soft shadows and afternoon
+          light — warm and nostalgic
+        </figcaption>
+      </div>
+      <div id="houseFinalMessage" class="reel-final-message" tabindex="0">
+        A presence lingers in the walls...
+        <button id="houseReplayBtn">🔄 Replay Reel</button>
+      </div>
+    </section>
+
+    <section id="puppy-corner">
+      <h2>🐾 Meet Luna, Our Coastal Companion</h2>
+      <p>
+        Even in a house steeped in mystery, life stirs in the sweetest ways.
+        Luna, the spirited little adventurer, brings warmth and wonder to
+        Shadowpoint House. She loves exploring every nook and cranny — chasing
+        sunbeams across old wooden floors, sniffing through secret garden paths,
+        and watching dolphins leap beyond the cliffside deck. Her joyful energy
+        is a bright contrast to the lingering shadows, filling each corner of
+        the house with love and laughter.
+      </p>
+      <img
+        src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/313/original/SH_Puppy.jpg?1751253298"
+        alt="Luna the puppy playing in the garden"
+      />
+    </section>
+
+    <section id="haunted-garden">
+      <h2>🏴‍☠️ The Garden of Secrets</h2>
+      <p>
+        Beyond the crumbling stone arch and tangled vines lies the garden —
+        wild, fragrant, and strangely timeless. Lavender mingles with native sea
+        daisies, while forgotten statues stand quietly in the overgrowth, their
+        eyes ever watchful.
+      </p>
+      <p>
+        The house once belonged to a distinguished sailor-turned-privateer,
+        Captain Elias Mooring. Stories whisper that he returned from the South
+        Seas with riches — and secrets — never meant to reach shore. Locals
+        speak of gold buried beneath the old gum tree and a restless presence
+        that strolls the grounds on misty nights.
+      </p>
+      <p>
+        Visitors have reported the scent of salt and tobacco in the air, and
+        faint humming — like a sea shanty — carried on the wind. Some say
+        Captain Mooring never truly left… and still watches over his hidden
+        trove.
+      </p>
+
+      <a href="#" id="journalLink" style="color: #4b2e2e; font-weight: bold"
+        >📜 Read a page from Captain Mooring’s journal</a
+      >
+      <br />
+      <button
+        onclick="alert('The garden gate creaks open... the scent of old roses and ocean salt beckons. The garden shadows below beckon you.')"
+      >
+        Enter the Garden
+      </button>
+    </section>
+
+    <section id="garden-reel">
+      <h2>Garden Shadows</h2>
+      <div class="reel-gallery" id="gardenGallery">
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/502/original/garden_1.jpg?1751500170"
+          alt="Garden 1"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          Winding stone pathways meander through a lush coastal garden dotted
+          with native casuarinas, lavender, and sea daisies.
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/503/original/garden_2.jpg?1751500569"
+          alt="Garden 2"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          An antique stone archway draped in climbing vines beckons visitors to
+          discover the garden’s secret nook.
+        </figcaption>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/504/original/garden_3.jpg?1751500707"
+          alt="Ghost in garden"
+          class="reel-item"
+          tabindex="0"
+        />
+        <figcaption>
+          A spectral presence wanders the wild garden paths, where lavender
+          scents mingle with whispers of the sea.
+        </figcaption>
+      </div>
+      <div id="gardenFinalMessage" class="reel-final-message" tabindex="0">
+        A quiet presence is felt, lingering in the hedges...
+        <button id="gardenReplayBtn">🔄 Replay Reel</button>
+      </div>
+    </section>
+
+    <section id="captain-eyes">
+      <h2>🛞 Captain Mooring’s Watchful Eyes</h2>
+      <p>
+        In the heart of Shadowpoint House, among the dusty heirlooms and faded
+        portraits, hangs a painting of Captain Elias Mooring. Some claim his
+        eyes have followed them… others swear they moved. But tales have a habit
+        of growing with the telling.
+        <br /><br />
+        Watch and decide for yourself.
+      </p>
+      <div style="padding: 56.25% 0 0 0; position: relative">
+        <iframe
+          src="https://player.vimeo.com/video/1098375095?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
+          title="captain_elias_portrait"
+        ></iframe>
+      </div>
+      <script src="https://player.vimeo.com/api/player.js"></script>
+    </section>
+
+    <section id="piano">
+      <h2>🎹 The Weathered Grand</h2>
+      <p>
+        At the heart of the living room rests a grand piano, its timber worn and
+        weathered by years of ocean breeze and stories. The rich grain tells
+        tales of countless melodies played beneath vaulted ceilings, while
+        salt-kissed air adds a whisper of the sea to every note. This piano
+        isn’t just an instrument — it’s the soul of the house, connecting past
+        and present through music.
+      </p>
+      <img
+        src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/316/original/piano_room.png?1751253680"
+        alt="Weathered Grand Piano Shadowpoint House"
+      />
+    </section>
+
+    <section id="secret-feature">
+      <h2>📚 The Hidden Crypt</h2>
+      <p>
+        Nestled between antique leather-bound volumes is a book with a worn
+        crimson spine—<em>The Art of Shadows</em>. Remove it, and the bookcase
+        clicks. A low rumble follows as the shelf glides open, revealing a
+        hidden crypt filled with mysterious relics.
+      </p>
+      <button
+        id="pullSecretBook"
+        class="book-button"
+        aria-expanded="false"
+        aria-controls="crypt-gallery"
+      >
+        Pull The Art of Shadows
+      </button>
+
+      <div
+        id="crypt-gallery"
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label="Hidden crypt images gallery"
+      >
+        <div class="crypt-gallery">
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/431/original/crypt_1.jpg?1751417298"
+              alt="Pull secret book to crypt"
+              tabindex="0"
+            />
+            <figcaption>
+              Pulling <em>The Art of Shadows</em> triggers a hidden mechanism in
+              the bookshelf.
+            </figcaption>
+          </figure>
+
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/432/original/crypt_2.jpg?1751417440"
+              alt="Enter the crypt"
+              tabindex="0"
+            />
+            <figcaption>
+              The bookcase slides aside, revealing a shadowy stone passage into
+              the crypt.
+            </figcaption>
+          </figure>
+
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/433/original/crypt_3.jpg?1751417470"
+              alt="Pirate's chest"
+              tabindex="0"
+            />
+            <figcaption>
+              A rusted pirate’s chest sits ominously, its heavy iron clasps
+              broken open — revealing ancient maps and a timeworn compass
+              nestled within.
+            </figcaption>
+          </figure>
+
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/434/original/crypt_4.jpg?1751417566"
+              alt="Mysterious skeleton with sword"
+              tabindex="0"
+            />
+            <figcaption>
+              The remains of a long-forgotten guardian still clutch a rusted
+              sword, as if forever poised to strike down any who trespass upon
+              the cursed ground.
+            </figcaption>
+          </figure>
+
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/435/original/crypt_5.jpg?1751417719"
+              alt="Pirate runes and portal"
+              tabindex="0"
+            />
+            <figcaption>
+              Ancient runes etched into stone whisper of a portal beyond time
+              and sea.
+            </figcaption>
+          </figure>
+
+          <figure class="crypt-item">
+            <img
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/169/436/original/crypt_7.jpg?1751417774"
+              alt="Pirate treasure"
+              tabindex="0"
+            />
+            <figcaption>
+              Coins glint in the shadows, scrolls curled tight with secrets —
+              has no one dared claim Captain Mooring’s prize?
+            </figcaption>
+          </figure>
+        </div>
+        <p
+          id="cryptFinalMessage"
+          tabindex="0"
+          style="font-size: 1.1rem; font-style: italic"
+        >
+          You’ve reached the end… or so it seems.<br />
+          The crypt is silent now — but watching.<br />
+          Will it let you leave?<br />
+          Or have you become part of the legend of Shadowpoint House?
+        </p>
+      </div>
+    </section>
+    <div id="pirate-journal" style="display: none">
+      <h2>📜 Captain Mooring’s Journal</h2>
+      <p>
+        📜 Captain Mooring’s Journal, Entry #47 “March 7th, 1812 — The sea was
+        restless today. A fog rolled in from the east, thick as molasses. I
+        swear I saw her again... the shadow on the waves. The men grow uneasy. I
+        cannot shake the feeling that the house watches back.
+      </p>
+      <p>
+        Underneath the gnarled old casuarina on this very property lies the last
+        of my treasure — a chest of gold coins from faraway lands, hidden deep
+        beneath the earth.
+      </p>
+      <p>
+        Beware, for a curse watches over this buried wealth, sworn to protect it
+        from prying hands. Any who dare disturb its resting place shall awaken
+        shadows darker than night, and misfortune shall follow their every step.
+      </p>
+      <p>Let this be a warning: some secrets are best left undisturbed.”</p>
+      <button
+        onclick="document.getElementById('pirate-journal').style.display='none'"
+      >
+        Close
+      </button>
+    </div>
+    <footer>
+      <p>
+        <a
+          href="#top"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        >
+          ⬆️ Back to top
+        </a>
+      </p>
+
+      <p>
+        Coded with ❤️ and a little puppy help 🐾 by
+        <a
+          href="https://github.com/LeishaH"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Leisha Henry
+        </a>
+        —
+        <a
+          href="https://github.com/LeishaH/shadowpoint-house"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Code
+        </a>
+        |
+        <a
+          href="https://shadowpointhouse.netlify.app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Live Site
+        </a>
+      </p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ===== House Modal Toggle =====
+        const houseModal = document.getElementById("houseModal");
+        const exploreBtn = document.getElementById("exploreBtn");
+        const h1Title = document.querySelector("h1");
+
+        exploreBtn.addEventListener("click", () => {
+          houseModal.style.display = "none";
+        });
+
+        h1Title.addEventListener("click", () => {
+          houseModal.style.display = "flex";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // ===== Dark Mode Toggle =====
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        darkModeToggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          darkModeToggle.textContent = document.body.classList.contains(
+            "dark-mode"
+          )
+            ? "☀️ Light Mode"
+            : "🌙 Dark Mode";
+        });
+
+        // ===== Captain Mooring's Journal Toggle =====
+        const journalLink = document.getElementById("journalLink");
+        const pirateJournal = document.getElementById("pirate-journal");
+
+        if (journalLink && pirateJournal) {
+          journalLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            pirateJournal.style.display = "block";
+          });
+        }
+
+        // ===== Crypt Gallery Logic =====
+        const pullBookBtn = document.getElementById("pullSecretBook");
+        const cryptGallery = document.getElementById("crypt-gallery");
+        const cryptItems = Array.from(document.querySelectorAll(".crypt-item"));
+        const cryptFinalMessage = document.getElementById("cryptFinalMessage");
+
+        let currentIndex = 0;
+
+        function resetCrypt() {
+          cryptGallery.style.display = "none";
+          cryptFinalMessage.style.display = "none";
+          currentIndex = 0;
+
+          cryptItems.forEach((img) => {
+            img.style.opacity = "0.8";
+            img.style.pointerEvents = "auto";
+            img.classList.remove("clicked");
+            img.style.transform = "";
+          });
+
+          pullBookBtn.setAttribute("aria-expanded", "false");
+        }
+
+        pullBookBtn.addEventListener("click", () => {
+          if (cryptGallery.style.display === "none") {
+            cryptGallery.style.display = "block";
+            cryptFinalMessage.style.display = "none";
+            currentIndex = 0;
+
+            cryptItems.forEach((img, idx) => {
+              img.style.opacity = idx === 0 ? "1" : "0.3";
+              img.style.pointerEvents = idx === 0 ? "auto" : "none";
+              img.classList.remove("clicked");
+              img.style.transform = "";
+            });
+
+            pullBookBtn.setAttribute("aria-expanded", "true");
+
+            window.scrollTo({
+              top: cryptGallery.offsetTop,
+              behavior: "smooth",
+            });
+          } else {
+            resetCrypt();
+          }
+        });
+
+        cryptItems.forEach((img, idx) => {
+          img.addEventListener("click", () => {
+            if (idx !== currentIndex) return;
+
+            img.classList.add("clicked");
+            img.style.opacity = "0";
+            img.style.pointerEvents = "none";
+            img.style.transform = "scale(2.5) translateY(-100px)";
+            currentIndex++;
+
+            if (currentIndex < cryptItems.length) {
+              const nextImg = cryptItems[currentIndex];
+              nextImg.style.opacity = "1";
+              nextImg.style.pointerEvents = "auto";
+            } else {
+              cryptFinalMessage.style.display = "block";
+              cryptFinalMessage.style.opacity = "0";
+              cryptFinalMessage.style.transition = "opacity 0.5s ease";
+
+              setTimeout(() => {
+                cryptFinalMessage.style.opacity = "1";
+                cryptFinalMessage.scrollIntoView({ behavior: "smooth" });
+              }, 10);
+            }
+          });
+
+          img.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              img.click();
+            }
+          });
+        });
+
+        cryptFinalMessage.addEventListener("click", resetCrypt);
+        cryptFinalMessage.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            resetCrypt();
+          }
+        });
+
+        resetCrypt(); // Run on load
+
+        // ===== Reel Logic (House & Garden) =====
+        function setupReel(galleryId, finalMessageId, replayBtnId) {
+          const gallery = document.getElementById(galleryId);
+          const images = gallery.querySelectorAll(".reel-item");
+          const finalMessage = document.getElementById(finalMessageId);
+          const replayBtn = document.getElementById(replayBtnId);
+          let index = 0;
+
+          function resetReel() {
+            index = 0;
+            finalMessage.style.display = "none";
+            images.forEach((img, i) => {
+              img.classList.remove("clicked");
+              img.style.pointerEvents = i === 0 ? "auto" : "none";
+              img.style.opacity = i === 0 ? "1" : "0.3";
+            });
+          }
+
+          images.forEach((img, i) => {
+            img.addEventListener("click", () => {
+              if (i !== index) return;
+              img.classList.add("clicked");
+              img.style.pointerEvents = "none";
+              index++;
+
+              if (index < images.length) {
+                images[index].style.pointerEvents = "auto";
+                images[index].style.opacity = "1";
+              } else {
+                finalMessage.style.display = "block";
+                finalMessage.scrollIntoView({ behavior: "smooth" });
+              }
+            });
+          });
+
+          replayBtn.addEventListener("click", resetReel);
+          resetReel();
+        }
+
+        setupReel("houseGallery", "houseFinalMessage", "houseReplayBtn");
+        setupReel("gardenGallery", "gardenFinalMessage", "gardenReplayBtn");
+      });
+    </script>
+  </body>
+</html>
